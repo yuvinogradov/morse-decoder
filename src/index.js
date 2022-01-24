@@ -38,7 +38,17 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    const binary_morse_table = {}
+
+    for(let c of Object.keys(MORSE_TABLE)){
+        const binary_code = c.split('').map(char => char==='.'?'10':11).join('').padStart(10,'0')
+        binary_morse_table[binary_code] = MORSE_TABLE[c]
+    }
+    binary_morse_table['**********']=' '
+    
+    const res = expr.match(/.{10}/g).map(i=>binary_morse_table[i]).join('')
+    
+    return res
 }
 
 module.exports = {
